@@ -8,22 +8,12 @@ using System.Threading.Tasks;
 
 namespace Jurnal_MOD5_1302204079_KPL
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            SayaTubeVideo tube = new SayaTubeVideo("tutorial...");
-            tube.PrintVideoDetails();
-            tube.IncreaseplayCount(1);
-            tube.PrintVideoDetails();
-        }
-    }
+    using System.Diagnostics.Contracts;
     public class SayaTubeVideo
     {
         int id;
         string title;
         int playCount;
-
 
         public SayaTubeVideo(string judul)
         {
@@ -36,14 +26,14 @@ namespace Jurnal_MOD5_1302204079_KPL
             this.playCount = 0;
         }
 
-        public void IncreaseplayCount(int angka)
+        public void increasePlayCount(int number)
         {
-            Contract.Requires(angka <= 25000000, "input terlalu besar!");
+            Contract.Requires(number <= 25000000, "input terlalu besar!");
             try
             {
                 checked
                 {
-                    this.playCount += angka;
+                    this.playCount += number;
                 }
             }
             catch (Exception ex)
@@ -64,12 +54,14 @@ namespace Jurnal_MOD5_1302204079_KPL
 
         public void printVideoDetails()
         {
-            Console.WriteLine("title: " + title);
-            Console.WriteLine("id: " + id);
-            Console.WriteLine("playCount:" + playCount);
+            Console.WriteLine("ID\t\t:" + this.id.ToString());
+            Console.WriteLine("Title\t\t:" + this.title);
+            Console.WriteLine("Play Count\t:" + this.playCount.ToString());
         }
 
-        internal void PrintVideoDetails()
+
+
+        internal void IncreasePlayCount(int v)
         {
             throw new NotImplementedException();
         }
@@ -78,14 +70,14 @@ namespace Jurnal_MOD5_1302204079_KPL
     public class SayaTubeUser
     {
         private int id;
-        internal string username;
-        List<SayaTubeVideo> uploadedVideos;
-        private object video;
+        private List<SayaTubeVideo> uploadedVideos;
+        private String Username;
 
-        public SayaTubeUser(string username)
+        public SayaTubeUser(String judul)
         {
-            Random shuffle = new Random();
-            this.id = shuffle.Next(0, 100000);
+            Random ids = new Random();
+            id = ids.Next(0, 100000);
+            this.Username = null;
             this.uploadedVideos = new List<SayaTubeVideo>();
         }
 
@@ -102,19 +94,37 @@ namespace Jurnal_MOD5_1302204079_KPL
         public void AddVideo(SayaTubeVideo video)
         {
             uploadedVideos.Add(video);
-            this.video = this.video;
-
         }
 
-        public void PrintAllVideoPlaycount()
+        public void printAllvideoplayCount()
         {
-            Console.WriteLine("User : " + this.video);
             for (int i = 0; i < uploadedVideos.Count; i++)
             {
-                Console.WriteLine("Video " + (i + 1) + " Judul : " + this.uploadedVideos[i].GetTitle());
+                Console.WriteLine("username:" + Username);
+                Console.WriteLine("video:" + (i + 1) + ":" + uploadedVideos[i]);
             }
         }
     }
-}
+    public class main
+    {
+        public static void Main()
+        {
+            SayaTubeVideo test = new(null);
+            test.printVideoDetails();
 
+            SayaTubeVideo baru = new("Cara mematikan windows defender" +
+                " dan mematikan antivirus yang sedang aktif agar tidak mengganggu proses installasi");
+            baru.printVideoDetails();
+
+            SayaTubeVideo saya = new("Tutorial Design By Contract – Alwan Kemal.");
+            saya.printVideoDetails();
+
+            for (int i = 0; i < 4; i++)
+            {
+                saya.increasePlayCount(123456789);
+            }
+            saya.printVideoDetails();
+        }
+    }
+}
 
