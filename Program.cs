@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace tpmodul5_1302204024
+namespace Jurnal_MOD5_1302204079_KPL
 {
     class Program
     {
@@ -28,7 +28,7 @@ namespace tpmodul5_1302204024
         public SayaTubeVideo(string judul)
         {
             Contract.Requires(judul != null, "input null!");
-            Contract.Requires(judul.Length <= 100, "input terlalu panjang!");
+            Contract.Requires(judul.Length <= 200, "input terlalu panjang!");
 
             Random random = new();
             this.id = random.Next(99999);
@@ -38,7 +38,7 @@ namespace tpmodul5_1302204024
 
         public void IncreaseplayCount(int angka)
         {
-            Contract.Requires(angka <= 10000000, "input terlalu besar!");
+            Contract.Requires(angka <= 25000000, "input terlalu besar!");
             try
             {
                 checked
